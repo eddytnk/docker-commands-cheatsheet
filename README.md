@@ -89,5 +89,37 @@ Example: `docker run -it eddytnk/debian:1.00`
 
 ## How to create a custom docker image using Dockerfile
 
+Dockerfile is a text file that contains all the instructions users provide to assemble a docker image. Each instruction will create a new layer to the image. 
 
+A Dockerfile must not have any extension and must be name `Dockerfile`
+
+### How to write instruction in the Dockerfile
+
+The first instruction must be a specification of the base image e.g 
+
+
+```
+FROM debian:jessie
+
+```
+
+The next instruction must be the RUN command to execute when the conatiner is started
+
+
+```
+FROM debian:jessie
+RUN apt-get update
+RUN apt-get install -y git
+```
+### Building the docker image with docker build command
+
+Save your Dockerfile and open the terminal to the directory of the Dockerfile.
+
+specify the docker build command
+
+`docker build -t <repository-name>:<tag> <path-to-Dockerfile>`
+
+Example `docker build -t eddytnk/debian:1.00 .`  
+
+`dot (.)` because I am in the current directory of my Dockerfile 
 
