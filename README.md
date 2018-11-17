@@ -103,7 +103,7 @@ FROM debian:jessie
 
 ```
 
-The next instruction must be the RUN command to execute when the conatiner is started
+The next instruction must be the RUN command to execute when building the image is started
 
 
 ```
@@ -123,3 +123,53 @@ Example `docker build -t eddytnk/debian:1.00 .`
 
 `dot (.)` because I am in the current directory of my Dockerfile 
 
+
+## More on dockerFile
+You can specify one RUN command with multiple instruction
+
+```
+FROM debian:jessie
+RUN apt-get update && apt-get install -y \
+    git \
+    python\
+    vim 
+```
+### CMD Instruction 
+
+You can specify the CMD instruction using a Dockerfile. CMD Instruction is the instruction that runs when the container is started. If you don't specify the CMD instruction in the Dockerfile, docker will use the default command defined in the based image.
+
+For debian:jessie, the default command is bash.
+
+Remember, the CMD instruction does NOT run when building the image, it only runs when the container starts up.
+
+Example:
+
+```
+FROM debian:jessie
+RUN apt-get update && apt-get install -y \
+    git \
+    python\
+    vim 
+CMD ["echo", "Hello Word!"]
+```
+
+### COPY Instruction
+
+The COPY instruction copies new files and directory from the  build context and add them to the file system of the container.
+
+```
+FROM debian:jessie
+RUN apt-get update && apt-get install -y \
+    git \
+    python\
+    vim 
+COPY myfile.txt /src/myfile.txt
+```
+
+The example Dockerfile will copy `myfile.txt` into `/src/myfile.txt` after the container is started
+
+### ADD Instruction
+
+Simillar to COPY instruction but ADD allows you to download a file from the internet and copy to the conatiner when it is started.
+
+ADD can automatically unpack compressed file
