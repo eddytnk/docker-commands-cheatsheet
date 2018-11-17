@@ -51,4 +51,43 @@ After running the above command, go to your browser and run `http://host-ip-addr
 
 `docker logs <container-id>`
 
+### To check the full set of image layers that make up an image
+
+`docker history <image>:<tag>`
+
+
+## How to create a custom docker image using docker commit
+
+In this section, 
+1. We will pull and run the debian image from docker repository (docker hub) 
+2. We will install git into the the runing container. 
+3. Finally we will package/commit this container into a new docker image. 
+
+The idea of the have debain image with git installed.
+
+Let's get started
+
+We will pull and run the debian image from docker 
+
+`docker run -it debian:jessie`
+
+We will install git into the the runing container. In the interactive mode install git using:
+
+`apt-get update && apt-get install -y git`
+
+Finally we will package/commit this container into a new docker image. 
+
+`docker commit <container-id> <repository-name>:<tag>`
+
+Remember to get `container-id` use `docker ps -a` and select the container id of the debain conatiner 
+
+The `repository-name` is the username of the docker registry/new-image-name e.g `eddytnk/debian`
+
+You can now start a container based on this new image. 
+Example: `docker run -it eddytnk/debian:1.00`
+
+
+## How to create a custom docker image using Dockerfile
+
+
 
