@@ -173,3 +173,17 @@ The example Dockerfile will copy `myfile.txt` into `/src/myfile.txt` after the c
 Simillar to COPY instruction but ADD allows you to download a file from the internet and copy to the conatiner when it is started.
 
 ADD can automatically unpack compressed file
+
+
+## How to push images to Docker Hub (Docker Registry)
+
+if you wish to change your image repository name and tag name
+
+`docker tag <image-id> <new-image-name>:<tag>`
+
+Remember to use `docker images` to get your image-id.
+
+To push your image to docker hub your first need to login to docker hub using:
+
+`docker login --username=<docker-hub-id> ` then provide your password.
+
