@@ -35,6 +35,10 @@ Recall that when you runa container in detached mode by specifying `-d` the term
 
 `docker inspect <container-id>`
 
+### To run a command in a running container
+
+`docker exec -it <container-id> <specify the command to run>`
+
 This inspection gives us information about the container like IP address, MAC address, image id, log path, status etc
 
 ### To run an image like Tomcat and expose it to the host in another port
@@ -187,3 +191,7 @@ To push your image to docker hub your first need to login to docker hub using:
 
 `docker login --username=<docker-hub-id> ` then provide your password.
 
+then you do:
+`docker push <repository-name>:<tag>`
+
+Example: `docker push eddytnk/debian:1.00`
