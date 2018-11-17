@@ -6,13 +6,13 @@ Cheat sheet  commands used when working with Docker
 
 ### To start a container from an images (e.g from a busybox images and run a command in the container)
 
-`docker run <images>:<tag> <any command you wish to execute in that container when it is stated>`
+`docker run <image>:<tag> <any command you wish to execute in that container when it is stated>`
 
 Example: `docker run busybox:1.29 echo "Hello World!"`
 
 ### To start a container from an images (e.g from a busybox images and run a command in the container) in the Background
 
-`docker run -d <images>:<tag> <any command you wish to execute in that container when it is stated>`
+`docker run -d <image>:<tag> <any command you wish to execute in that container when it is stated>`
 
 ### To show all runing containers
 `docker ps`
@@ -27,4 +27,4 @@ Example: `docker run busybox:1.29 echo "Hello World!"`
 
 ### To start and remove the container when it finished run
 
-`docker run --rm <images>:<tag> <any command you wish to execute in that container when it is stated>`
+`docker run --rm <image>:<tag> <any command you wish to execute in that container when it is stated>`
