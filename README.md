@@ -135,7 +135,7 @@ You can specify one RUN command with multiple instruction
 FROM debian:jessie
 RUN apt-get update && apt-get install -y \
     git \
-    python\
+    python \
     vim 
 ```
 ### CMD Instruction 
@@ -152,7 +152,7 @@ Example:
 FROM debian:jessie
 RUN apt-get update && apt-get install -y \
     git \
-    python\
+    python \
     vim 
 CMD ["echo", "Hello Word!"]
 ```
@@ -165,7 +165,7 @@ The COPY instruction copies new files and directory from the  build context and 
 FROM debian:jessie
 RUN apt-get update && apt-get install -y \
     git \
-    python\
+    python \
     vim 
 COPY myfile.txt /src/myfile.txt
 ```
@@ -195,3 +195,47 @@ then you do:
 `docker push <repository-name>:<tag>`
 
 Example: `docker push eddytnk/debian:1.00`
+
+
+## Docker Compose
+
+This is a tool for defining and runing multi-container docker applications. We define all the containers in a single file called `docker-compose.yml` file and run a single command to start up all the containers
+
+
+### How to create docker-compose.yml file
+
+1. We specify the version, as of these write-up we have `version: '3'`
+2. We specify the services that make up our application. for each service,  we provide instruction on how to build the container. 
+* Service name, 
+* build: `path-to-Service-Dockerfile`
+* ports: `defines ports to expose to external network define in <host:container> format`
+* depend_on: shows the serivices/ conatiners that should be started before our applicaion conatainer
+
+We will define two services to be run on two containers as example in the file below `dockerapp` and `redis` 
+
+docker-compose.yml file
+```
+version: '3'
+services:
+    dockerapp:
+        build: .
+        ports:
+            - "5000:5000"
+        depends_on:
+            - redis
+    redis:
+        image: redis:3.2.0
+```
+
+To run the instruction in the yml file, we use `docker-compose up` this will start the dockerapp container and the redis container and link them. Meaning the dockerapp container application can discover the redis conatiner
+
+## Docker compose workflow
+
+* Start containers: `docker-compose up -d` -d is to run in detached mode
+* Stop all runing containers without removing them : `docker-compose stop`
+* To remove all containers : `docker-compose rm`
+* To Rebuild all the images created from the dockerFile : `docker-compose build`. use to avoid `docker-compose stop` and `docker-compose rm` then `docker-compose up` pattern. This is common when we make changes in a container setup and we want to rebuild the containers from the beginning 
+* Check status of containers managed by docker-compose: `docker-compose ps`
+* Check conatiner's log: `docker-compose logs <container-name>`
+
+
