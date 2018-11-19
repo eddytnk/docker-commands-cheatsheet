@@ -239,3 +239,58 @@ To run the instruction in the yml file, we use `docker-compose up` this will sta
 * Check conatiner's log: `docker-compose logs <container-name>`
 
 
+## Docker Networking
+
+Containers can communicate in three different network
+
+### None Network
+
+The container is closed and cannot communicate to the outside world. Your application will be unable to make connection to the internet or any other network
+ To start a conatiner in a None Network we use
+
+ `docker run -d --net none <image-name>:<tag>`
+
+ ### Bridge Network
+
+ This is the default network model in docker containers. All the conatiners on thesame bridge network can connect with each other and can connect to the outside world via the bridge network interface. Docker create a default bridge network called bride with the docker daemon is started.
+
+ Container within a different bridge network can't access each other.
+
+ To create a bridge network we use
+
+ `docker network create --driver bridge <bridge-network-name>`
+
+ To list out all networks
+
+ `docker network ls`
+
+ ### Host Network
+
+ It is adds a container on the host's network stack.Containers deployed on the host stack has full access to the host's interface. This type of containers are called `Open Containers`
+
+To start a container with host network
+
+`docker run -d --net host <image-name>:<tag>`
+
+
+To define docker network through docker compose file, let edit our docker-compose.yml file and added the `networks` field same level as services. We then set the netork name to the different services
+
+```
+version: '3'
+services:
+    dockerapp:
+        build: .
+        ports:
+            - "5000:5000"
+        depends_on:
+            - redis
+        networks: 
+            - my_network
+    redis:
+        image: redis:3.2.0
+        networks: 
+            - my_network
+networks:
+    my_network:
+        driver: bridge
+```
