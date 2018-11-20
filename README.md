@@ -294,3 +294,11 @@ networks:
     my_network:
         driver: bridge
 ```
+
+## Docker Swarm
+
+This about scaling docker for large application. What if you have an application which consist of multiple containers which cannot fit into a single host? docker swarm provide solution for this question.
+
+We have a swarm manager which managers multiple docker daemon runing on different host. when you run a service, the swarm manager decide which daemon to run this service. You just need to point your docker client to the swarm manager instead of each an every docker daemon.
+
+
