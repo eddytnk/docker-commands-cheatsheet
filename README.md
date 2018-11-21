@@ -1,5 +1,19 @@
 # docker-commands-cheatsheet
-Cheat sheet  commands used when working with Docker 
+* Cheat sheet  commands used when working with Docker
+* How to create a custom docker image using docker commit
+* How to create a custom docker image using Dockerfile
+* More on dockerFile 
+    * CMD Instruction
+    * COPY Instruction
+    * ADD Instruction)
+* How to push images to Docker Hub (Docker Registry)
+* Docker Compose (How to create docker-compose.yml file)
+* Docker compose workflow
+* Docker Networking
+    * None Network
+    * Bridge Network
+    * Host Network
+* Brief on Docker Swarm
 
 ### To desplay all images found on your local machine
 `docker images`
